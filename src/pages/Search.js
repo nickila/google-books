@@ -1,13 +1,16 @@
 import React from "react";
 import API from "../utils/API";
+import BooksContainer from "../components/BooksContainer";
 
 class Search extends React.Component {
 
     state = {
+        search: "",
         books: [],
-        title: "guy",
-        author: "dsfasd",
-        synopsis: "asdfasdf",
+        title: "",
+        author: "",
+        synopsis: "",
+        error: ""
 
     };
 
@@ -22,34 +25,52 @@ class Search extends React.Component {
     }
 
     handleInputChange = event => {
+        this.setState({ search: event.target.value });
+        console.log(this.state.search);
 
     }
     handleFormSubmit = event => {
-
-    }
+        event.preventDefault();
+        API.search(this.state.search)
+            .then(res => {
+                if (res.data.status === "error") {
+                    throw new Error(res.data.message);
+                }
+                console.log(this.state.search);
+                this.setState({ books: res.data.items });
+                console.log(this.state.books)
+                console.log(res.data.items[0].volumeInfo.authors[0]);
+            })
+            .catch(err => this.setState({ error: err.message }));
+    };
     render() {
 
         return (
-            <div className="row">
-                <div className="col-md-8 mx-auto">
-                    <h1>Search</h1>
-                    <div class="input-group input-group-lg">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-lg">Title</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
-                    </div>
-                </div>
+            <div>
                 <div className="row">
-                    <div className="col-md-8">
-                        {/* <ul>
-                            <li>{this.name.title}</li>
-                            <li>{this.name.author}</li>
-                            <li>{this.name.synopsis}</li>
-                        </ul> */}
+                    <div className="col-md-8 mx-auto">
+                        <form>
+                            <div className="form-group">
+                                <label>Search Books by Title</label>
+                                <input type="text" className="form-control" id="titleSearch" placeholder="Title" onChange={this.handleInputChange} />
+                            </div>
+                            <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>Submit</button>
+                        </form>
                     </div>
                 </div>
+                {this.state.books.map(books => (
+                <div className="row">
+                <div className="col-md-8">
+                    <BooksContainer 
+                    title={books.volumeInfo.title}
+                    author={books.volumeInfo.authors[0]}
+                    // synopsis={books.}
+                    />
+                </div>
+                </div>
+                ))}
             </div>
+
         );
     }
 }
