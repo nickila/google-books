@@ -29,12 +29,19 @@ class Search extends React.Component {
         console.log(this.state.search);
 
     }
-    saveBook = id => {
+
+    
+
+    saveBook = event => {
+        event.preventDefault();
+        // console.log(id);
         API.save({
             title: this.state.title,
             author: this.state.author,
             synopsis: this.state.synopsis
         })
+            .then(res => this.loadBooks())
+            .catch(err => console.log(err));
     }
     handleFormSubmit = event => {
         event.preventDefault();
@@ -66,18 +73,20 @@ class Search extends React.Component {
                     </div>
                 </div>
                 {this.state.books.map(books => (
-                <div className="row">
-                <div className="col-md-6 mx-auto">
-                <br />
-                    <BooksContainer 
-                    title={books.volumeInfo.title}
-                    author={books.volumeInfo.authors[0]}
-                    key={books.id}
-                    synopsis={books.volumeInfo.description}
-                    saveBook={this.saveBook}
-                    />
-                </div>
-                </div>
+                    <div className="row">
+                        <div className="col-md-6 mx-auto">
+                            <br />
+                            <BooksContainer
+                                title={books.volumeInfo.title}
+                                author={books.volumeInfo.authors[0]}
+                                key={books.id}
+                                id={books.id}
+                                synopsis={books.volumeInfo.description}
+                                // saveBook={this.saveBook}
+                            />
+                            <button className="card-link" onClick={this.saveBook}>Save</button>
+                        </div>
+                    </div>
                 ))}
             </div>
 
