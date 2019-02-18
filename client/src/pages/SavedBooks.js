@@ -7,9 +7,9 @@ class SavedBooks extends React.Component {
 
     state = {
         books: [],
-        title: "Some stuff",
-        author: "Hubert",
-        synopsis: "Good stuff, real real good stuff...",
+        title: "",
+        author: "",
+        synopsis: "",
 
     };
 

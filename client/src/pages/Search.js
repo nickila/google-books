@@ -29,6 +29,13 @@ class Search extends React.Component {
         console.log(this.state.search);
 
     }
+    saveBook = id => {
+        API.save({
+            title: this.state.title,
+            author: this.state.author,
+            synopsis: this.state.synopsis
+        })
+    }
     handleFormSubmit = event => {
         event.preventDefault();
         API.search(this.state.search)
@@ -63,11 +70,11 @@ class Search extends React.Component {
                 <div className="col-md-6 mx-auto">
                 <br />
                     <BooksContainer 
-                    
                     title={books.volumeInfo.title}
                     author={books.volumeInfo.authors[0]}
                     key={books.id}
                     synopsis={books.volumeInfo.description}
+                    saveBook={this.saveBook}
                     />
                 </div>
                 </div>
