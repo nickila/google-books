@@ -27,22 +27,20 @@ class Search extends React.Component {
     handleInputChange = event => {
         this.setState({ search: event.target.value });
         console.log(this.state.search);
-
     }
 
-    
-
-    saveBook = event => {
-        event.preventDefault();
-        // console.log(id);
+    saveBook = data => {
+        // This data is being passed in from BooksContainer.js props (all props) when the save button is clicked.
+        console.log(data)
         API.save({
-            title: this.state.title,
-            author: this.state.author,
-            synopsis: this.state.synopsis
+            title: data.title,
+            author: data.author,
+            synopsis: data.synopsis
         })
-            .then(res => this.loadBooks())
+            .then(console.log("way to go!"))
             .catch(err => console.log(err));
     }
+
     handleFormSubmit = event => {
         event.preventDefault();
         API.search(this.state.search)
@@ -57,8 +55,8 @@ class Search extends React.Component {
             })
             .catch(err => this.setState({ error: err.message }));
     };
-    render() {
 
+    render() {
         return (
             <div>
                 <div className="row">
@@ -73,7 +71,7 @@ class Search extends React.Component {
                     </div>
                 </div>
                 {this.state.books.map(books => (
-                    <div className="row">
+                    <div className="row" key={books.id}>
                         <div className="col-md-6 mx-auto">
                             <br />
                             <BooksContainer
@@ -82,14 +80,12 @@ class Search extends React.Component {
                                 key={books.id}
                                 id={books.id}
                                 synopsis={books.volumeInfo.description}
-                                // saveBook={this.saveBook}
+                                saveBook={this.saveBook}
                             />
-                            <button className="card-link" onClick={this.saveBook}>Save</button>
                         </div>
                     </div>
                 ))}
             </div>
-
         );
     }
 }

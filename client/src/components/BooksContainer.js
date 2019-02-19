@@ -9,7 +9,8 @@ function BooksContainer(props) {
                 <h5 className="card-subtitle mb-2 text-muted">by {props.author}</h5>
                 <hr />
                 <p className="card-text">{props.synopsis}</p>
-                {/* <button className="card-link" onClick={() => props.saveBook(props.id)}>Save</button> */}
+                <p>{props.id}</p>
+                <button className="card-link" onClick={() => props.saveBook(props)}>Save</button>
             </div>
         </div>
         

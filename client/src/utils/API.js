@@ -7,6 +7,8 @@ export default {
     },
 
     save: function(bookData) {
+        console.log("bookData below")
+        console.log(bookData)
         return axios.post("api/books", bookData);
     }
 
