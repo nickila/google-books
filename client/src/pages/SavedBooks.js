@@ -12,6 +12,7 @@ class SavedBooks extends React.Component {
         author: "",
         synopsis: "",
 
+
     };
 
     componentDidMount() {
@@ -39,7 +40,7 @@ class SavedBooks extends React.Component {
                     <h1>Saved Books</h1>
                     {this.state.books.map(book => (
                         <div className="row" key={book._id}>
-                            <div className="col-md-9 mx-auto">
+                            <div className="col-md-12 mx-auto">
                                 <br />
                                 <SavedContainer
                                     title={book.title}

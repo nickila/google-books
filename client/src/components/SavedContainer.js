@@ -11,12 +11,11 @@ function BooksContainer(props) {
                         <h3 className="card-subtitle mb-2 text-muted">by {props.author}</h3>
                     </div>
                     <div className="col-md-3">
-                        <img src={props.img} />
+                        <img src={props.img} alt={props.title} />
                     </div>
                 </div>
                 <hr />
                 <div className="row">
-
                     <p className="card-text">{props.synopsis}</p>
                 </div>
                 <a href={props.link} className="card-text">Preview</a>

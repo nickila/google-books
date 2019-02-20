@@ -37,7 +37,9 @@ class Search extends React.Component {
         API.save({
             title: data.title,
             author: data.author,
-            synopsis: data.synopsis
+            synopsis: data.synopsis,
+            link: data.link,
+            img: data.img
         })
         // .then(function(err, result) {
         //     if (err) {
@@ -77,10 +79,10 @@ class Search extends React.Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-8 mx-auto">
+                    <div className="col-md-9 mx-auto">
+                    <h1>Search Books by Title</h1>
                         <form>
                             <div className="form-group">
-                                <label>Search Books by Title</label>
                                 <input type="text" className="form-control" id="titleSearch" placeholder="Title" onChange={this.handleInputChange} />
                             </div>
                             <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>Submit</button>
