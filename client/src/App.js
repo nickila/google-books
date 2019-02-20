@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Title from "./components/Title";
 import SavedBooks from "./pages/SavedBooks";
 import Search from "./pages/Search";
-// import NoMatch from "./pages/NoMatch";
+import NoMatch from "./pages/NoMatch";
 import './App.css';
 
 class App extends Component {
@@ -16,8 +16,9 @@ class App extends Component {
           <Title />
           <Switch>
             <Route exact path="/" component={SavedBooks} />
+            <Route exact path="/books" component={SavedBooks} />
             <Route exact path="/search" component={Search} />
-            {/* <Route component={NoMatch} /> */}
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>

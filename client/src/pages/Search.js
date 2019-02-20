@@ -31,14 +31,31 @@ class Search extends React.Component {
 
     saveBook = data => {
         // This data is being passed in from BooksContainer.js props (all props) when the save button is clicked.
-        console.log(data)
+        // console.log(data)
+        // The data then gets passed into API save function where it comes in as bookData and gets passed
+        // into a mongoose schema via axios.
         API.save({
             title: data.title,
             author: data.author,
             synopsis: data.synopsis
         })
-            .then(console.log("way to go!"))
-            .catch(err => console.log(err));
+        // .then(function(err, result) {
+        //     if (err) {
+        //         console.log(err)
+        //     } else {
+        //         console.log(result)
+        //     }
+        // })
+    
+            .then(res => {
+                console.log(res.data.config)
+                if (res.data.status === "error") {
+                    throw new Error(res.data.message);
+                }
+                console.log("what now?")
+                console.log(res.data.config)
+            })
+            .catch(err => console.log(err.response));
     }
 
     handleFormSubmit = event => {
