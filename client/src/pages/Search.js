@@ -93,11 +93,14 @@ class Search extends React.Component {
                             <br />
                             <BooksContainer
                                 title={books.volumeInfo.title}
-                                author={books.volumeInfo.authors[0]}
+                                author={books.volumeInfo.authors}
                                 key={books.id}
                                 id={books.id}
                                 synopsis={books.volumeInfo.description}
+                                link={books.volumeInfo.previewLink}
+                                img={books.volumeInfo.imageLinks.thumbnail}
                                 saveBook={this.saveBook}
+                                
                             />
                         </div>
                     </div>

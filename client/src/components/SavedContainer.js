@@ -21,11 +21,15 @@ function BooksContainer(props) {
                 </div>
                 <a href={props.link} className="card-text">Preview</a>
                 <br />
-                <button className="card-link" onClick={() => props.saveBook(props)}>Save</button>
+                <button className="card-link" onClick={() => props.deleteBook(props)}>Delete</button>
             </div>
         </div>
-
+        
     )
 }
 
 export default BooksContainer;
+
+
+
+
