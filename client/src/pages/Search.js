@@ -41,14 +41,6 @@ class Search extends React.Component {
             link: data.link,
             img: data.img
         })
-        // .then(function(err, result) {
-        //     if (err) {
-        //         console.log(err)
-        //     } else {
-        //         console.log(result)
-        //     }
-        // })
-    
             .then(res => {
                 console.log(res.data.config)
                 if (res.data.status === "error") {
@@ -67,10 +59,7 @@ class Search extends React.Component {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);
                 }
-                console.log(this.state.search);
                 this.setState({ books: res.data.items });
-                console.log(this.state.books)
-                console.log(res.data.items[0].volumeInfo.authors[0]);
             })
             .catch(err => this.setState({ error: err.message }));
     };
